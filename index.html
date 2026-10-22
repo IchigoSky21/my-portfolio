@@ -1,0 +1,1286 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="Portfolio IchigoSky21 — Software Engineering, Web Development, Machine Learning, Computer Vision, and NLP.">
+  <title>IchigoSky21 — Portfolio</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Fredoka:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#f2f6fc;
+      --surface:#ffffff;
+      --surface-2:#eaf0f9;
+      --line:#cbd6e8;
+      --fg:#121a33;
+      --muted:#58647f;
+      --red:#d42a47;
+      --blue:#1f72c4;
+      --yellow:#ffc72c;
+      --green:#178a4c;
+      --on-red:#fff;
+      --on-blue:#fff;
+      --on-yellow:#1b1500;
+      --on-green:#fff;
+      --shadow:rgba(10,22,60,.20);
+      color-scheme:light;
+      --display:"Fredoka","Trebuchet MS",system-ui,sans-serif;
+      --body:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;
+      --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+    }
+
+    :root[data-theme="dark"]{
+      --bg:#0e1424;
+      --surface:#17203a;
+      --surface-2:#202b48;
+      --line:#2c3858;
+      --fg:#edf2ff;
+      --muted:#9aa7c7;
+      --red:#ff5570;
+      --blue:#4da3f5;
+      --yellow:#ffd34d;
+      --green:#2fbf73;
+      --on-red:#2a0510;
+      --on-blue:#04182c;
+      --on-yellow:#1b1500;
+      --on-green:#03200f;
+      --shadow:rgba(0,0,0,.42);
+      color-scheme:dark;
+    }
+
+    @media (prefers-color-scheme:dark){
+      :root:not([data-theme="light"]){
+        --bg:#0e1424;
+        --surface:#17203a;
+        --surface-2:#202b48;
+        --line:#2c3858;
+        --fg:#edf2ff;
+        --muted:#9aa7c7;
+        --red:#ff5570;
+        --blue:#4da3f5;
+        --yellow:#ffd34d;
+        --green:#2fbf73;
+        --on-red:#2a0510;
+        --on-blue:#04182c;
+        --on-yellow:#1b1500;
+        --on-green:#03200f;
+        --shadow:rgba(0,0,0,.42);
+        color-scheme:dark;
+      }
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      color:var(--fg);
+      background:var(--bg);
+      background-image:radial-gradient(circle,var(--surface-2) 0 6px,transparent 7px);
+      background-size:34px 34px;
+      font-family:var(--body);
+      font-size:17px;
+      line-height:1.6;
+      padding:0 max(18px,env(safe-area-inset-right,0px)) 48px max(18px,env(safe-area-inset-left,0px));
+    }
+
+    a{color:inherit}
+    button{font:inherit}
+    :focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+    .wrap{max-width:1120px;margin:auto}
+    .mono{
+      font-family:var(--mono);
+      font-size:.74rem;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+    }
+
+    h1,h2,h3{
+      margin:0;
+      font-family:var(--display);
+      line-height:1.05;
+      font-weight:700;
+    }
+
+    /* ---------- Header ---------- */
+
+    .top{
+      position:sticky;
+      top:0;
+      padding-top:env(safe-area-inset-top,0px);
+      z-index:20;
+      background:color-mix(in srgb,var(--bg) 94%,transparent);
+      backdrop-filter:blur(10px);
+      border-bottom:2px solid var(--fg);
+    }
+
+    .top-row{
+      display:flex;
+      align-items:center;
+      gap:18px;
+      flex-wrap:wrap;
+      padding:10px 0 7px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      text-decoration:none;
+      font-family:var(--display);
+      font-weight:700;
+      font-size:1.3rem;
+    }
+
+    .brand-mark{
+      width:24px;
+      height:15px;
+      background:var(--red);
+      border-radius:4px;
+      position:relative;
+      box-shadow:0 3px 0 var(--shadow);
+    }
+
+    .brand-mark::before{
+      content:"";
+      position:absolute;
+      width:11px;
+      height:7px;
+      left:6px;
+      top:-6px;
+      background:var(--red);
+      border-radius:5px 5px 0 0;
+    }
+
+    .nav{
+      display:flex;
+      gap:4px;
+      margin-left:auto;
+      overflow-x:auto;
+      scrollbar-width:none;
+    }
+
+    .nav::-webkit-scrollbar{display:none}
+
+    .nav a{
+      white-space:nowrap;
+      text-decoration:none;
+      color:var(--muted);
+      padding:6px 10px;
+      border-radius:6px;
+    }
+
+    .nav a:hover,
+    .nav a.active{
+      color:var(--on-yellow);
+      background:var(--yellow);
+    }
+
+    .theme{
+      width:36px;
+      height:36px;
+      border:2px solid var(--fg);
+      border-radius:8px;
+      background:var(--surface);
+      color:var(--fg);
+      cursor:pointer;
+      box-shadow:0 3px 0 var(--shadow);
+    }
+
+    .progress{
+      height:7px;
+      display:flex;
+      gap:4px;
+      padding-bottom:7px;
+    }
+
+    .progress i{
+      flex:1;
+      border-radius:3px;
+      background:var(--line);
+    }
+
+    .progress i.on{background:var(--red)}
+
+    /* ---------- Hero ---------- */
+
+    .hero{
+      min-height:calc(100vh - 80px);
+      display:grid;
+      align-items:center;
+      grid-template-columns:1.15fr .85fr;
+      gap:60px;
+      padding:80px 0 100px;
+    }
+
+    .eyebrow{
+      color:var(--blue);
+      margin-bottom:16px;
+    }
+
+    .hero h1{
+      font-size:clamp(3.8rem,8vw,7rem);
+      letter-spacing:-.04em;
+    }
+
+    .hero h1 span{display:block}
+    .hero h1 .accent{color:var(--red)}
+
+    .hero-copy{
+      max-width:650px;
+      margin-top:24px;
+      font-size:1.15rem;
+      color:var(--muted);
+    }
+
+    .hero-copy strong{color:var(--fg)}
+
+    .cta{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      margin-top:30px;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      min-height:48px;
+      padding:10px 20px;
+      border:2px solid var(--fg);
+      border-radius:9px;
+      text-decoration:none;
+      font-family:var(--display);
+      font-weight:600;
+      background:var(--surface);
+      box-shadow:0 5px 0 var(--shadow);
+      transition:.12s ease;
+    }
+
+    .btn:hover{
+      transform:translateY(2px);
+      box-shadow:0 3px 0 var(--shadow);
+    }
+
+    .btn.primary{
+      background:var(--red);
+      color:var(--on-red);
+    }
+
+    .hero-card{
+      background:var(--surface);
+      border:2px solid var(--fg);
+      border-radius:16px;
+      padding:28px;
+      box-shadow:0 7px 0 var(--shadow);
+      position:relative;
+    }
+
+    .step{
+      position:absolute;
+      top:-20px;
+      left:20px;
+      width:44px;
+      height:44px;
+      display:grid;
+      place-items:center;
+      background:var(--fg);
+      color:var(--bg);
+      border-radius:10px;
+      font-family:var(--display);
+      font-size:1.4rem;
+      font-weight:700;
+    }
+
+    .build{
+      display:grid;
+      grid-template-columns:repeat(5,1fr);
+      gap:8px;
+      max-width:340px;
+      margin:20px auto 28px;
+    }
+
+    .brick{
+      aspect-ratio:1;
+      border-radius:8px;
+      background:var(--c);
+      box-shadow:inset 0 -4px 0 rgba(0,0,0,.15),0 4px 0 var(--shadow);
+      position:relative;
+    }
+
+    .brick::before{
+      content:"";
+      position:absolute;
+      width:34%;
+      aspect-ratio:1;
+      top:-6%;
+      left:33%;
+      border-radius:50%;
+      background:var(--c);
+    }
+
+    .r{--c:var(--red)}
+    .b{--c:var(--blue)}
+    .g{--c:var(--green)}
+    .y{--c:var(--yellow)}
+
+    .hero-note{
+      border-top:2px solid var(--line);
+      padding-top:16px;
+      color:var(--muted);
+    }
+
+    .hero-note strong{
+      display:block;
+      color:var(--fg);
+      font-family:var(--display);
+      font-size:1.35rem;
+    }
+
+    /* ---------- Sections ---------- */
+
+    section{
+      padding:88px 0;
+      border-top:2px solid var(--fg);
+      scroll-margin-top:90px;
+    }
+
+    .section-head{
+      display:flex;
+      justify-content:space-between;
+      align-items:end;
+      gap:30px;
+      margin-bottom:42px;
+    }
+
+    .section-title{
+      display:flex;
+      align-items:center;
+      gap:15px;
+    }
+
+    .section-number{
+      width:44px;
+      height:44px;
+      flex:none;
+      display:grid;
+      place-items:center;
+      background:var(--fg);
+      color:var(--bg);
+      border-radius:9px;
+      font-family:var(--display);
+      font-size:1.35rem;
+      font-weight:700;
+    }
+
+    .section-head h2{
+      font-size:clamp(2.5rem,6vw,4.3rem);
+    }
+
+    .lead{
+      max-width:580px;
+      color:var(--muted);
+      margin:0;
+    }
+
+    /* ---------- About ---------- */
+
+    .about{
+      display:grid;
+      grid-template-columns:1.2fr .8fr;
+      gap:60px;
+    }
+
+    .about p{
+      margin:0 0 18px;
+      max-width:65ch;
+    }
+
+    .spec{
+      margin:0;
+      border:2px solid var(--fg);
+      border-radius:12px;
+      overflow:hidden;
+      background:var(--surface);
+    }
+
+    .spec-title{
+      padding:13px 16px;
+      background:var(--yellow);
+      color:var(--on-yellow);
+      font-family:var(--display);
+      font-weight:700;
+    }
+
+    .spec-row{
+      display:flex;
+      justify-content:space-between;
+      gap:18px;
+      padding:12px 16px;
+      border-top:1px solid var(--line);
+    }
+
+    .spec-row span:first-child{color:var(--muted)}
+    .spec-row span:last-child{text-align:right}
+
+    /* ---------- Projects ---------- */
+
+    .filters{
+      display:flex;
+      flex-wrap:wrap;
+      gap:9px;
+      margin-bottom:32px;
+    }
+
+    .filter{
+      border:2px solid var(--fg);
+      background:var(--surface);
+      color:var(--fg);
+      padding:7px 16px;
+      border-radius:8px;
+      cursor:pointer;
+      font-weight:600;
+      box-shadow:0 3px 0 var(--shadow);
+    }
+
+    .filter.active{
+      background:var(--fg);
+      color:var(--bg);
+    }
+
+    .projects{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:22px;
+    }
+
+    .project{
+      display:flex;
+      flex-direction:column;
+      min-height:340px;
+      padding:23px;
+      background:var(--surface);
+      border:2px solid var(--fg);
+      border-radius:13px;
+      box-shadow:0 6px 0 var(--shadow);
+      transition:.15s ease;
+    }
+
+    .project:hover{
+      transform:translateY(3px);
+      box-shadow:0 3px 0 var(--shadow);
+    }
+
+    .project-top{
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      color:var(--muted);
+    }
+
+    .project-kind{
+      color:var(--fg);
+      font-weight:600;
+    }
+
+    .project h3{
+      margin-top:22px;
+      font-size:2rem;
+    }
+
+    .project p{
+      color:var(--muted);
+      margin:12px 0 20px;
+    }
+
+    .tags{
+      display:flex;
+      flex-wrap:wrap;
+      gap:6px;
+      margin-top:auto;
+      padding:0;
+      list-style:none;
+    }
+
+    .tags li{
+      border:1px solid var(--line);
+      background:var(--bg);
+      padding:3px 8px;
+      border-radius:5px;
+      font-family:var(--mono);
+      font-size:.68rem;
+    }
+
+    .project-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-top:18px;
+    }
+
+    .small-btn{
+      padding:7px 12px;
+      border:2px solid var(--fg);
+      border-radius:7px;
+      text-decoration:none;
+      font-family:var(--display);
+      font-weight:600;
+      font-size:.9rem;
+      background:var(--surface);
+    }
+
+    .small-btn.primary{
+      background:var(--blue);
+      color:var(--on-blue);
+    }
+
+    /* ---------- Experience / learning ---------- */
+
+    .timeline{
+      display:grid;
+      gap:18px;
+      max-width:850px;
+    }
+
+    .timeline-item{
+      display:grid;
+      grid-template-columns:150px 1fr;
+      gap:24px;
+      padding:20px;
+      background:var(--surface);
+      border:2px solid var(--fg);
+      border-radius:12px;
+      box-shadow:0 5px 0 var(--shadow);
+    }
+
+    .timeline-date{color:var(--blue)}
+    .timeline-item h3{font-size:1.5rem;margin-bottom:7px}
+    .timeline-item p{margin:0;color:var(--muted)}
+
+    /* ---------- Skills ---------- */
+
+    .skills{
+      display:grid;
+      grid-template-columns:repeat(4,minmax(0,1fr));
+      gap:18px;
+    }
+
+    .skill-group{
+      padding:20px;
+      background:var(--surface);
+      border:2px solid var(--fg);
+      border-radius:11px;
+    }
+
+    .skill-group h3{
+      font-size:1.3rem;
+      margin-bottom:15px;
+    }
+
+    .skill-group ul{
+      display:flex;
+      flex-wrap:wrap;
+      gap:7px;
+      list-style:none;
+      margin:0;
+      padding:0;
+    }
+
+    .skill-group li{
+      padding:5px 9px;
+      border-radius:6px;
+      background:var(--c);
+      color:var(--on);
+      font-size:.85rem;
+      box-shadow:0 2px 0 var(--shadow);
+    }
+
+    /* ---------- Contact ---------- */
+
+    .contact{
+      display:grid;
+      grid-template-columns:1fr .8fr;
+      gap:60px;
+      align-items:end;
+    }
+
+    .contact h2{
+      font-size:clamp(3rem,8vw,6.5rem);
+    }
+
+    .highlight{
+      display:inline-block;
+      background:var(--red);
+      color:var(--on-red);
+      padding:0 .18em;
+      border-radius:10px;
+      box-shadow:0 6px 0 var(--shadow);
+    }
+
+    .channels{
+      display:grid;
+      gap:12px;
+    }
+
+    .channel{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      padding:14px 16px;
+      background:var(--surface);
+      border:2px solid var(--fg);
+      border-radius:10px;
+    }
+
+    .channel a{
+      text-decoration:none;
+      font-weight:600;
+      overflow-wrap:anywhere;
+      text-align:right;
+    }
+
+    footer{
+      padding-top:30px;
+      border-top:2px solid var(--fg);
+      color:var(--muted);
+      display:flex;
+      justify-content:space-between;
+      gap:15px;
+      flex-wrap:wrap;
+    }
+
+    [hidden]{display:none!important}
+
+    @media (max-width:900px){
+      .hero,
+      .about,
+      .contact{
+        grid-template-columns:1fr;
+      }
+
+      .hero{
+        min-height:auto;
+        padding-top:65px;
+      }
+
+      .skills{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+      }
+    }
+
+    @media (max-width:700px){
+      body{font-size:16px;padding-left:max(14px,env(safe-area-inset-left,0px));padding-right:max(14px,env(safe-area-inset-right,0px))}
+
+      .nav{
+        order:5;
+        width:100%;
+        margin:0;
+      }
+
+      .top-row{gap:10px}
+      .brand{margin-right:auto}
+
+      .hero{
+        padding:55px 0 70px;
+        gap:45px;
+      }
+
+      .hero h1{font-size:clamp(3.3rem,17vw,5.3rem)}
+      .hero-copy{font-size:1.05rem}
+
+      section{padding:65px 0}
+      .section-head{
+        display:block;
+        margin-bottom:30px;
+      }
+
+      .lead{margin-top:15px}
+
+      .projects{
+        grid-template-columns:1fr;
+      }
+
+      .timeline-item{
+        grid-template-columns:1fr;
+        gap:7px;
+      }
+
+      .skills{
+        grid-template-columns:1fr;
+      }
+
+      .contact{gap:35px}
+      .channel{align-items:flex-start;flex-direction:column}
+      .channel a{text-align:left}
+    }
+
+    @media (prefers-reduced-motion:reduce){
+      html{scroll-behavior:auto}
+      *{transition:none!important}
+    }
+  </style>
+</head>
+
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <div class="top-row">
+      <a class="brand" href="#home">
+        <span class="brand-mark" aria-hidden="true"></span>
+        IchigoSky21
+      </a>
+
+      <nav class="nav" id="nav" aria-label="Navigasi utama">
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#experience">Experience</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <button class="theme" id="theme" type="button" aria-label="Ganti tema">◐</button>
+    </div>
+
+    <div class="progress" aria-hidden="true">
+      <i class="on"></i><i></i><i></i><i></i><i></i><i></i>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- HERO -->
+  <section class="hero" id="home" style="border-top:0">
+    <div>
+      <div class="eyebrow mono">01 / Build something useful</div>
+
+      <h1>
+        Building
+        <span class="accent">software</span>
+        piece by piece.
+      </h1>
+
+      <p class="hero-copy">
+        Saya <strong>Emmanuel / IchigoSky21</strong>, mahasiswa Software Engineering
+        yang membangun aplikasi web dan proyek Machine Learning dengan fokus pada
+        sesuatu yang sederhana: <strong>berguna, jelas, dan nyaman digunakan.</strong>
+      </p>
+
+      <div class="cta">
+        <a class="btn primary" href="#projects">Lihat proyek →</a>
+        <a class="btn" href="#contact">Mari terhubung</a>
+      </div>
+    </div>
+
+    <aside class="hero-card">
+      <span class="step">1</span>
+
+      <div class="build" aria-label="Ilustrasi susunan brick">
+        <span class="brick r"></span>
+        <span class="brick y"></span>
+        <span class="brick b"></span>
+        <span class="brick g"></span>
+        <span class="brick r"></span>
+
+        <span class="brick b"></span>
+        <span class="brick g"></span>
+        <span class="brick r"></span>
+        <span class="brick y"></span>
+        <span class="brick b"></span>
+
+        <span class="brick g"></span>
+        <span class="brick r"></span>
+        <span class="brick y"></span>
+        <span class="brick b"></span>
+        <span class="brick g"></span>
+
+        <span class="brick y"></span>
+        <span class="brick b"></span>
+        <span class="brick r"></span>
+        <span class="brick g"></span>
+        <span class="brick y"></span>
+      </div>
+
+      <div class="hero-note">
+        <strong>My building blocks</strong>
+        Web · ML · Computer Vision · NLP
+      </div>
+    </aside>
+  </section>
+
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-head">
+      <div class="section-title">
+        <span class="section-number">2</span>
+        <h2>About</h2>
+      </div>
+
+      <p class="lead">
+        Sedikit konteks tentang siapa saya, apa yang saya pelajari,
+        dan jenis software yang ingin saya bangun.
+      </p>
+    </div>
+
+    <div class="about">
+      <div>
+        <p>
+          Saya sedang menempuh Software Engineering dan tertarik pada
+          persimpangan antara software development dan artificial intelligence.
+        </p>
+
+        <p>
+          Saya menikmati proses mengubah masalah yang cukup nyata menjadi
+          aplikasi yang bisa dipakai: mulai dari web utility, aplikasi
+          berbasis AI, sampai eksperimen machine learning.
+        </p>
+
+        <p>
+          Prinsip yang saya pegang sederhana:
+          <strong>tidak harus rumit untuk menjadi berguna.</strong>
+        </p>
+      </div>
+
+      <div class="spec">
+        <div class="spec-title">My build specification</div>
+
+        <div class="spec-row">
+          <span>Education</span>
+          <span>Software Engineering</span>
+        </div>
+
+        <div class="spec-row">
+          <span>Focus</span>
+          <span>Web · ML · CV · NLP</span>
+        </div>
+
+        <div class="spec-row">
+          <span>Based</span>
+          <span>Indonesia</span>
+        </div>
+
+        <div class="spec-row">
+          <span>Languages</span>
+          <span>Indonesia · English</span>
+        </div>
+
+        <div class="spec-row">
+          <span>GitHub</span>
+          <a href="https://github.com/IchigoSky21" target="_blank" rel="noopener">
+            IchigoSky21 ↗
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="section-head">
+      <div class="section-title">
+        <span class="section-number">3</span>
+        <h2>Projects</h2>
+      </div>
+
+      <p class="lead">
+        Beberapa project yang paling mewakili hal yang sedang saya bangun dan pelajari.
+      </p>
+    </div>
+
+    <div class="filters" role="group" aria-label="Filter project">
+      <button class="filter active" data-filter="all">All</button>
+      <button class="filter" data-filter="web">Web</button>
+      <button class="filter" data-filter="ml">ML / AI</button>
+      <button class="filter" data-filter="research">Research</button>
+    </div>
+
+    <div class="projects" id="projectGrid">
+
+      <!-- Tambah tombol demo di dalam <div class="project-actions"> sebuah proyek:
+           <a class="small-btn primary" href="URL-DEMO" target="_blank" rel="noopener">Live Demo ↗</a> -->
+
+      <article class="project" data-category="web">
+        <div class="project-top mono">
+          <span class="project-kind">Web · Personal</span>
+          <span>01</span>
+        </div>
+
+        <h3>GIFTo</h3>
+
+        <p>
+          AI-powered gift recommendation web app dengan pendekatan editorial,
+          PWA support, dan deployment melalui Vercel.
+        </p>
+
+        <ul class="tags">
+          <li>JavaScript</li>
+          <li>PWA</li>
+          <li>Vercel</li>
+          <li>AI API</li>
+        </ul>
+        <div class="project-actions">
+          <a class="small-btn" href="https://github.com/IchigoSky21/ai-gift-prediction" target="_blank" rel="noopener">GitHub ↗</a>
+        </div>
+      </article>
+
+
+      <article class="project" data-category="web">
+        <div class="project-top mono">
+          <span class="project-kind">Web · Personal</span>
+          <span>02</span>
+        </div>
+
+        <h3>Generator Sitasi</h3>
+
+        <p>
+          Web utility untuk membuat sitasi IEEE dan APA, mengambil metadata
+          akademik, serta membantu workflow referensi.
+        </p>
+
+        <ul class="tags">
+          <li>Vanilla JS</li>
+          <li>CrossRef API</li>
+          <li>PWA</li>
+        </ul>
+        <div class="project-actions">
+          <a class="small-btn" href="https://github.com/IchigoSky21/generate-sitation" target="_blank" rel="noopener">GitHub ↗</a>
+        </div>
+      </article>
+
+
+      <article class="project" data-category="ml">
+        <div class="project-top mono">
+          <span class="project-kind">NLP · Team</span>
+          <span>03</span>
+        </div>
+
+        <h3>MindScan</h3>
+
+        <p>
+          Proyek NLP menggunakan TF-IDF dan Logistic Regression untuk
+          eksperimen klasifikasi teks.
+        </p>
+
+        <ul class="tags">
+          <li>NLP</li>
+          <li>TF-IDF</li>
+          <li>Logistic Regression</li>
+        </ul>
+      </article>
+
+
+      <article class="project" data-category="ml">
+        <div class="project-top mono">
+          <span class="project-kind">Computer Vision · Team</span>
+          <span>04</span>
+        </div>
+
+        <h3>Deteksi Lubang Jalan</h3>
+
+        <p>
+          Eksperimen computer vision dengan HOG, LBP, dan SVM untuk
+          mendeteksi lubang jalan.
+        </p>
+
+        <ul class="tags">
+          <li>HOG</li>
+          <li>LBP</li>
+          <li>SVM</li>
+        </ul>
+      </article>
+
+
+      <article class="project" data-category="ml">
+        <div class="project-top mono">
+          <span class="project-kind">Machine Learning · Team</span>
+          <span>05</span>
+        </div>
+
+        <h3>Deteksi Fraud</h3>
+
+        <p>
+          Aplikasi machine learning untuk membantu mendeteksi transaksi
+          yang berpotensi fraudulent menggunakan Random Forest.
+        </p>
+
+        <ul class="tags">
+          <li>Python</li>
+          <li>Random Forest</li>
+          <li>Streamlit</li>
+        </ul>
+        <div class="project-actions">
+          <a class="small-btn" href="https://github.com/IchigoSky21/fraud-detection-app" target="_blank" rel="noopener">GitHub ↗</a>
+        </div>
+      </article>
+
+
+      <article class="project" data-category="research">
+        <div class="project-top mono">
+          <span class="project-kind">Research · Paper</span>
+          <span>06</span>
+        </div>
+
+        <h3>Prakiraan Listrik</h3>
+
+        <p>
+          Penelitian mengenai prakiraan konsumsi listrik rumah tangga
+          dan optimasi biaya menggunakan XGBoost dan Linear Programming.
+        </p>
+
+        <ul class="tags">
+          <li>XGBoost</li>
+          <li>Linear Programming</li>
+          <li>Research</li>
+        </ul>
+      </article>
+
+    </div>
+  </section>
+
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="section-head">
+      <div class="section-title">
+        <span class="section-number">4</span>
+        <h2>Experience</h2>
+      </div>
+
+      <p class="lead">
+        Perjalanan belajar dan pengalaman yang saya jalani sejauh ini.
+      </p>
+    </div>
+
+    <div class="timeline">
+
+      <article class="timeline-item">
+        <div class="timeline-date mono">NOW</div>
+        <div>
+          <h3>Software Engineering Student</h3>
+          <p>
+            Binus University — fokus pada software engineering, machine learning,
+            computer vision, NLP, dan project development.
+          </p>
+        </div>
+      </article>
+
+      <!-- Tambah pengalaman: salin satu blok <article class="timeline-item"> di atas, lalu ganti tanggal, peran, dan deskripsinya. -->
+
+    </div>
+  </section>
+
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="section-head">
+      <div class="section-title">
+        <span class="section-number">5</span>
+        <h2>Skills</h2>
+      </div>
+
+      <p class="lead">
+        Teknologi yang sudah saya pakai langsung di proyek-proyek di atas.
+      </p>
+    </div>
+
+    <div class="skills">
+
+      <div class="skill-group" style="--c:var(--blue);--on:var(--on-blue)">
+        <h3>Web</h3>
+        <ul>
+          <li>HTML</li>
+          <li>CSS</li>
+          <li>JavaScript</li>
+          <li>PWA</li>
+          <li>Vercel</li>
+        </ul>
+      </div>
+
+      <div class="skill-group" style="--c:var(--red);--on:var(--on-red)">
+        <h3>Machine Learning</h3>
+        <ul>
+          <li>Python</li>
+          <li>Random Forest</li>
+          <li>XGBoost</li>
+          <li>SVM</li>
+          <li>Logistic Regression</li>
+        </ul>
+      </div>
+
+      <div class="skill-group" style="--c:var(--green);--on:var(--on-green)">
+        <h3>CV / NLP</h3>
+        <ul>
+          <li>HOG</li>
+          <li>LBP</li>
+          <li>TF-IDF</li>
+          <li>Text Analysis</li>
+        </ul>
+      </div>
+
+      <div class="skill-group" style="--c:var(--yellow);--on:var(--on-yellow)">
+        <h3>Academic</h3>
+        <ul>
+          <li>IEEE</li>
+          <li>APA</li>
+          <li>Paper</li>
+          <li>Poster</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="contact">
+
+      <div>
+        <div class="mono" style="color:var(--blue);margin-bottom:15px">
+          06 / Last piece
+        </div>
+
+        <h2>
+          Let's <span class="highlight">build</span>
+          something useful.
+        </h2>
+
+        <p class="lead" style="margin-top:25px">
+          Terbuka untuk internship, project collaboration, dan diskusi
+          seputar software engineering dan AI.
+        </p>
+      </div>
+
+      <div class="channels">
+        <div class="channel">
+          <span class="mono">GitHub</span>
+          <a href="https://github.com/IchigoSky21" target="_blank" rel="noopener">
+            github.com/IchigoSky21 ↗
+          </a>
+        </div>
+
+        <div class="channel">
+          <span class="mono">Email</span>
+          <a href="mailto:hetobias05@gmail.com">hetobias05@gmail.com</a>
+        </div>
+
+        <div class="channel">
+          <span class="mono">LinkedIn</span>
+          <a href="https://www.linkedin.com/in/haposan-emmanuel-tobias-903b77325" target="_blank" rel="noopener">linkedin.com/in/haposan-emmanuel-tobias ↗</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+
+<footer class="wrap mono">
+  <span>© 2026 IchigoSky21</span>
+  <span>Built piece by piece with HTML, CSS & JS.</span>
+</footer>
+
+
+<script>
+(function(){
+
+  /* ---------- Theme ---------- */
+
+  const root = document.documentElement;
+  const themeButton = document.getElementById("theme");
+
+  try{
+    const saved = localStorage.getItem("theme");
+    if(saved) root.dataset.theme = saved;
+  }catch(e){}
+
+  themeButton.addEventListener("click", function(){
+    const current =
+      root.dataset.theme ||
+      (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+
+    const next = current === "dark" ? "light" : "dark";
+    root.dataset.theme = next;
+
+    try{
+      localStorage.setItem("theme", next);
+    }catch(e){}
+  });
+
+
+  /* ---------- Project filter ---------- */
+
+  const filters = document.querySelectorAll(".filter");
+  const projects = document.querySelectorAll(".project");
+
+  filters.forEach(function(filter){
+    filter.addEventListener("click", function(){
+      const category = filter.dataset.filter;
+
+      filters.forEach(function(item){
+        item.classList.toggle("active", item === filter);
+      });
+
+      projects.forEach(function(project){
+        project.hidden =
+          category !== "all" &&
+          project.dataset.category !== category;
+      });
+    });
+  });
+
+
+  /* ---------- Active navigation + progress ---------- */
+
+  const sections = Array.from(document.querySelectorAll("main section[id]"));
+  const navLinks = document.querySelectorAll(".nav a");
+  const bars = document.querySelectorAll(".progress i");
+
+  function setActive(index){
+    const id = sections[index].id;
+
+    navLinks.forEach(function(link){
+      link.classList.toggle("active", link.getAttribute("href") === "#" + id);
+    });
+
+    bars.forEach(function(bar, i){
+      bar.classList.toggle("on", i <= index);
+    });
+  }
+
+  if("IntersectionObserver" in window){
+    const observer = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting) setActive(sections.indexOf(entry.target));
+      });
+    },{
+      rootMargin:"-35% 0px -55% 0px"
+    });
+
+    sections.forEach(function(section){
+      observer.observe(section);
+    });
+  }
+
+  /* Bagian terakhir pendek, jadi aktifkan saat halaman mentok di bawah */
+  window.addEventListener("scroll", function(){
+    if(window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4){
+      setActive(sections.length - 1);
+    }
+  },{passive:true});
+
+})();
+</script>
+
+</body>
+</html>
