@@ -6,14 +6,6 @@ Personal portfolio of **Emmanuel (IchigoSky21)**, a Software Engineering student
 
 **Live site:** https://my-portofolio.hetobias05.workers.dev/
 
-![Portfolio home page](img/preview.png)
-
-![Projects section](img/preview-projects.png)
-
-<p align="center">
-  <img src="img/preview-mobile.png" width="260" alt="Portfolio on a phone">
-</p>
-
 ## Features
 
 - **Brick-inspired design:** studs, chunky shadows, and a build-instruction layout where each section is a numbered step.
@@ -129,16 +121,10 @@ Everything lives in `index.html`.
 
 ## Deployment
 
-The site is deployed on Cloudflare. To publish a change, edit `index.html`, commit it, and redeploy from the Cloudflare dashboard.
-
-`og-image.png` must sit next to `index.html` so the link preview image is served from `/og-image.png`. If you move the site to another domain, update the `canonical`, `og:url`, and `og:image` tags in the `<head>`.
+The site is deployed on Cloudflare. 
 
 ## Contact
 
 - GitHub: [@IchigoSky21](https://github.com/IchigoSky21)
 - LinkedIn: [Haposan Emmanuel Tobias](https://www.linkedin.com/in/haposan-emmanuel-tobias-903b77325)
 - Email: see the contact section on the [live site](https://my-portofolio.hetobias05.workers.dev/#contact)
-
-## License
-
-No license has been chosen yet, so all rights are reserved by default. If you want others to reuse the code, add a `LICENSE` file such as MIT.
