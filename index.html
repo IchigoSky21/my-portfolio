@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="id">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -112,8 +112,7 @@
       top:0;
       padding-top:env(safe-area-inset-top,0px);
       z-index:20;
-      background:color-mix(in srgb,var(--bg) 94%,transparent);
-      backdrop-filter:blur(10px);
+      background:var(--bg);
       border-bottom:2px solid var(--fg);
     }
 
@@ -222,7 +221,7 @@
     }
 
     .hero h1{
-      font-size:clamp(3.8rem,8vw,7rem);
+      font-size:clamp(3.4rem,5.8vw,5.6rem);
       letter-spacing:-.04em;
     }
 
@@ -260,11 +259,6 @@
       background:var(--surface);
       box-shadow:0 5px 0 var(--shadow);
       transition:.12s ease;
-    }
-
-    .btn:hover{
-      transform:translateY(2px);
-      box-shadow:0 3px 0 var(--shadow);
     }
 
     .btn.primary{
@@ -469,11 +463,6 @@
       border-radius:13px;
       box-shadow:0 6px 0 var(--shadow);
       transition:.15s ease;
-    }
-
-    .project:hover{
-      transform:translateY(3px);
-      box-shadow:0 3px 0 var(--shadow);
     }
 
     .project-top{
@@ -722,9 +711,66 @@
 
     @media (prefers-reduced-motion:reduce){
       html{scroll-behavior:auto}
-      *{transition:none!important}
+      *{transition:none!important;animation:none!important}
+    }
+
+    /* ---------- Motion ---------- */
+
+    html{-webkit-text-size-adjust:100%}
+    a,button{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+
+    .top{transition:transform .32s cubic-bezier(.2,.7,.2,1),box-shadow .25s ease}
+    .top.scrolled{box-shadow:0 4px 0 var(--shadow)}
+    .top.hide:not(:focus-within){transform:translateY(-100%)}
+    .progress i{transition:background-color .35s ease}
+    .nav a{transition:color .2s ease,background-color .2s ease}
+
+    @keyframes rise{from{opacity:0;transform:translateY(24px)}}
+    @keyframes pop{from{opacity:0;transform:translateY(12px) scale(.94)}}
+    @keyframes snap{
+      0%{opacity:0;transform:translateY(-18px) rotate(-3deg)}
+      60%{opacity:1;transform:translateY(4px) rotate(1deg)}
+      100%{opacity:1;transform:none}
+    }
+
+    .js .reveal{opacity:0}
+    .js .reveal.show{
+      opacity:1;
+      animation:rise .7s cubic-bezier(.2,.7,.2,1) var(--d,0s) backwards;
+    }
+    .project.pop{animation:pop .45s cubic-bezier(.3,1.35,.5,1) var(--d,0s) backwards}
+    .contact .show .highlight{animation:snap .7s cubic-bezier(.3,1.3,.5,1) .3s backwards}
+
+    .brick{
+      animation:pop .5s cubic-bezier(.3,1.5,.5,1) calc(.35s + var(--n,0) * 45ms) backwards;
+      transition:transform .15s ease;
+    }
+
+    .small-btn,.filter,.theme{
+      transition:transform .12s ease,box-shadow .12s ease,background-color .2s ease,color .2s ease;
+    }
+
+    @media (hover:hover){
+      .btn:hover{transform:translateY(2px);box-shadow:0 3px 0 var(--shadow)}
+      .project:hover{transform:translateY(3px);box-shadow:0 3px 0 var(--shadow)}
+      .brick:hover{transform:translateY(3px)}
+    }
+
+    .btn:active{transform:translateY(5px);box-shadow:0 0 0 var(--shadow)}
+    .small-btn:active,.filter:active,.theme:active{transform:translateY(2px);box-shadow:0 1px 0 var(--shadow)}
+    .project:active{transform:translateY(3px);box-shadow:0 3px 0 var(--shadow)}
+    .brick:active{transform:translateY(4px)}
+
+    html.theme-anim,
+    html.theme-anim *{
+      transition:background-color .35s ease,color .35s ease,border-color .35s ease,box-shadow .35s ease!important;
+    }
+
+    @media (max-width:700px){
+      section{scroll-margin-top:125px}
     }
   </style>
+<script>document.documentElement.classList.add("js")</script>
 </head>
 
 <body>
@@ -737,7 +783,7 @@
         IchigoSky21
       </a>
 
-      <nav class="nav" id="nav" aria-label="Navigasi utama">
+      <nav class="nav" id="nav" aria-label="Main navigation">
         <a href="#about">About</a>
         <a href="#projects">Projects</a>
         <a href="#experience">Experience</a>
@@ -745,7 +791,7 @@
         <a href="#contact">Contact</a>
       </nav>
 
-      <button class="theme" id="theme" type="button" aria-label="Ganti tema">◐</button>
+      <button class="theme" id="theme" type="button" aria-label="Toggle theme">◐</button>
     </div>
 
     <div class="progress" aria-hidden="true">
@@ -768,44 +814,42 @@
       </h1>
 
       <p class="hero-copy">
-        Saya <strong>Emmanuel / IchigoSky21</strong>, mahasiswa Software Engineering
-        yang membangun aplikasi web dan proyek Machine Learning dengan fokus pada
-        sesuatu yang sederhana: <strong>berguna, jelas, dan nyaman digunakan.</strong>
+        I'm <strong>Emmanuel / IchigoSky21</strong>, a Software Engineering student building web apps and Machine Learning projects around one simple idea: <strong>useful, clear, and comfortable to use.</strong>
       </p>
 
       <div class="cta">
-        <a class="btn primary" href="#projects">Lihat proyek →</a>
-        <a class="btn" href="#contact">Mari terhubung</a>
+        <a class="btn primary" href="#projects">View projects →</a>
+        <a class="btn" href="#contact">Let's connect</a>
       </div>
     </div>
 
     <aside class="hero-card">
       <span class="step">1</span>
 
-      <div class="build" aria-label="Ilustrasi susunan brick">
-        <span class="brick r"></span>
-        <span class="brick y"></span>
-        <span class="brick b"></span>
-        <span class="brick g"></span>
-        <span class="brick r"></span>
+      <div class="build" aria-label="Illustration of stacked bricks">
+        <span class="brick r" style="--n:0"></span>
+        <span class="brick y" style="--n:1"></span>
+        <span class="brick b" style="--n:2"></span>
+        <span class="brick g" style="--n:3"></span>
+        <span class="brick r" style="--n:4"></span>
 
-        <span class="brick b"></span>
-        <span class="brick g"></span>
-        <span class="brick r"></span>
-        <span class="brick y"></span>
-        <span class="brick b"></span>
+        <span class="brick b" style="--n:5"></span>
+        <span class="brick g" style="--n:6"></span>
+        <span class="brick r" style="--n:7"></span>
+        <span class="brick y" style="--n:8"></span>
+        <span class="brick b" style="--n:9"></span>
 
-        <span class="brick g"></span>
-        <span class="brick r"></span>
-        <span class="brick y"></span>
-        <span class="brick b"></span>
-        <span class="brick g"></span>
+        <span class="brick g" style="--n:10"></span>
+        <span class="brick r" style="--n:11"></span>
+        <span class="brick y" style="--n:12"></span>
+        <span class="brick b" style="--n:13"></span>
+        <span class="brick g" style="--n:14"></span>
 
-        <span class="brick y"></span>
-        <span class="brick b"></span>
-        <span class="brick r"></span>
-        <span class="brick g"></span>
-        <span class="brick y"></span>
+        <span class="brick y" style="--n:15"></span>
+        <span class="brick b" style="--n:16"></span>
+        <span class="brick r" style="--n:17"></span>
+        <span class="brick g" style="--n:18"></span>
+        <span class="brick y" style="--n:19"></span>
       </div>
 
       <div class="hero-note">
@@ -825,27 +869,22 @@
       </div>
 
       <p class="lead">
-        Sedikit konteks tentang siapa saya, apa yang saya pelajari,
-        dan jenis software yang ingin saya bangun.
+        A little context on who I am, what I'm studying, and the kind of software I want to build.
       </p>
     </div>
 
     <div class="about">
       <div>
         <p>
-          Saya sedang menempuh Software Engineering dan tertarik pada
-          persimpangan antara software development dan artificial intelligence.
+          I'm studying Software Engineering, with a particular interest in where software development meets artificial intelligence.
         </p>
 
         <p>
-          Saya menikmati proses mengubah masalah yang cukup nyata menjadi
-          aplikasi yang bisa dipakai: mulai dari web utility, aplikasi
-          berbasis AI, sampai eksperimen machine learning.
+          I enjoy turning real problems into apps people can actually use, from web utilities and AI-powered apps to machine learning experiments.
         </p>
 
         <p>
-          Prinsip yang saya pegang sederhana:
-          <strong>tidak harus rumit untuk menjadi berguna.</strong>
+          My principle is simple: <strong>it doesn't have to be complicated to be useful.</strong>
         </p>
       </div>
 
@@ -869,7 +908,7 @@
 
         <div class="spec-row">
           <span>Languages</span>
-          <span>Indonesia · English</span>
+          <span>Indonesian · English</span>
         </div>
 
         <div class="spec-row">
@@ -892,11 +931,11 @@
       </div>
 
       <p class="lead">
-        Beberapa project yang paling mewakili hal yang sedang saya bangun dan pelajari.
+        A few projects that best represent what I'm building and learning.
       </p>
     </div>
 
-    <div class="filters" role="group" aria-label="Filter project">
+    <div class="filters" role="group" aria-label="Project filters">
       <button class="filter active" data-filter="all">All</button>
       <button class="filter" data-filter="web">Web</button>
       <button class="filter" data-filter="ml">ML / AI</button>
@@ -905,7 +944,7 @@
 
     <div class="projects" id="projectGrid">
 
-      <!-- Tambah tombol demo di dalam <div class="project-actions"> sebuah proyek:
+      <!-- Add a demo button inside the <div class="project-actions"> of a project:
            <a class="small-btn primary" href="URL-DEMO" target="_blank" rel="noopener">Live Demo ↗</a> -->
 
       <article class="project" data-category="web">
@@ -917,8 +956,7 @@
         <h3>GIFTo</h3>
 
         <p>
-          AI-powered gift recommendation web app dengan pendekatan editorial,
-          PWA support, dan deployment melalui Vercel.
+          AI-powered gift recommendation web app with an editorial design approach, PWA support, and deployment on Vercel.
         </p>
 
         <ul class="tags">
@@ -939,11 +977,10 @@
           <span>02</span>
         </div>
 
-        <h3>Generator Sitasi</h3>
+        <h3>Citation Generator</h3>
 
         <p>
-          Web utility untuk membuat sitasi IEEE dan APA, mengambil metadata
-          akademik, serta membantu workflow referensi.
+          A web utility for generating IEEE and APA citations, fetching academic metadata, and streamlining the reference workflow.
         </p>
 
         <ul class="tags">
@@ -966,8 +1003,7 @@
         <h3>MindScan</h3>
 
         <p>
-          Proyek NLP menggunakan TF-IDF dan Logistic Regression untuk
-          eksperimen klasifikasi teks.
+          An NLP project using TF-IDF and Logistic Regression for text classification experiments.
         </p>
 
         <ul class="tags">
@@ -984,11 +1020,10 @@
           <span>04</span>
         </div>
 
-        <h3>Deteksi Lubang Jalan</h3>
+        <h3>Pothole Detection</h3>
 
         <p>
-          Eksperimen computer vision dengan HOG, LBP, dan SVM untuk
-          mendeteksi lubang jalan.
+          A computer vision experiment using HOG, LBP, and SVM to detect potholes.
         </p>
 
         <ul class="tags">
@@ -1005,11 +1040,10 @@
           <span>05</span>
         </div>
 
-        <h3>Deteksi Fraud</h3>
+        <h3>Fraud Detection</h3>
 
         <p>
-          Aplikasi machine learning untuk membantu mendeteksi transaksi
-          yang berpotensi fraudulent menggunakan Random Forest.
+          A machine learning app that helps flag potentially fraudulent transactions using Random Forest.
         </p>
 
         <ul class="tags">
@@ -1029,11 +1063,10 @@
           <span>06</span>
         </div>
 
-        <h3>Prakiraan Listrik</h3>
+        <h3>Electricity Forecasting</h3>
 
         <p>
-          Penelitian mengenai prakiraan konsumsi listrik rumah tangga
-          dan optimasi biaya menggunakan XGBoost dan Linear Programming.
+          Research on household electricity consumption forecasting and cost optimization using XGBoost and Linear Programming.
         </p>
 
         <ul class="tags">
@@ -1056,7 +1089,7 @@
       </div>
 
       <p class="lead">
-        Perjalanan belajar dan pengalaman yang saya jalani sejauh ini.
+        My learning journey and the experience I've gained so far.
       </p>
     </div>
 
@@ -1067,13 +1100,12 @@
         <div>
           <h3>Software Engineering Student</h3>
           <p>
-            Binus University — fokus pada software engineering, machine learning,
-            computer vision, NLP, dan project development.
+            Binus University — focusing on software engineering, machine learning, computer vision, NLP, and project development.
           </p>
         </div>
       </article>
 
-      <!-- Tambah pengalaman: salin satu blok <article class="timeline-item"> di atas, lalu ganti tanggal, peran, dan deskripsinya. -->
+      <!-- Add experience: copy the <article class="timeline-item"> block above, then change the date, role, and description. -->
 
     </div>
   </section>
@@ -1088,7 +1120,7 @@
       </div>
 
       <p class="lead">
-        Teknologi yang sudah saya pakai langsung di proyek-proyek di atas.
+        Technologies I've used hands-on in the projects above.
       </p>
     </div>
 
@@ -1155,8 +1187,7 @@
         </h2>
 
         <p class="lead" style="margin-top:25px">
-          Terbuka untuk internship, project collaboration, dan diskusi
-          seputar software engineering dan AI.
+          Open to internships, project collaboration, and conversations about software engineering and AI.
         </p>
       </div>
 
@@ -1194,9 +1225,13 @@
 <script>
 (function(){
 
+  const root = document.documentElement;
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const top = document.querySelector(".top");
+
+
   /* ---------- Theme ---------- */
 
-  const root = document.documentElement;
   const themeButton = document.getElementById("theme");
 
   try{
@@ -1210,12 +1245,47 @@
       (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
 
     const next = current === "dark" ? "light" : "dark";
+
+    if(!reduce){
+      root.classList.add("theme-anim");
+      setTimeout(function(){ root.classList.remove("theme-anim"); }, 450);
+    }
+
     root.dataset.theme = next;
 
     try{
       localStorage.setItem("theme", next);
     }catch(e){}
   });
+
+
+  /* ---------- Reveal on scroll ---------- */
+
+  const targets = document.querySelectorAll(
+    ".eyebrow,.hero h1,.hero-copy,.cta,.hero-card,.section-head,.filters," +
+    ".about > *,.project,.timeline-item,.skill-group,.contact > *"
+  );
+
+  if(!reduce && "IntersectionObserver" in window){
+    targets.forEach(function(el){ el.classList.add("reveal"); });
+
+    const revealObserver = new IntersectionObserver(function(entries){
+      let i = 0;
+
+      entries.forEach(function(entry){
+        if(!entry.isIntersecting) return;
+
+        entry.target.style.setProperty("--d", Math.min(i++, 5) * 80 + "ms");
+        entry.target.classList.add("show");
+        revealObserver.unobserve(entry.target);
+      });
+    },{
+      rootMargin:"0px 0px -6% 0px",
+      threshold:0.05
+    });
+
+    targets.forEach(function(el){ revealObserver.observe(el); });
+  }
 
 
   /* ---------- Project filter ---------- */
@@ -1226,15 +1296,23 @@
   filters.forEach(function(filter){
     filter.addEventListener("click", function(){
       const category = filter.dataset.filter;
+      let i = 0;
 
       filters.forEach(function(item){
         item.classList.toggle("active", item === filter);
       });
 
       projects.forEach(function(project){
-        project.hidden =
-          category !== "all" &&
-          project.dataset.category !== category;
+        const visible = category === "all" || project.dataset.category === category;
+        project.hidden = !visible;
+
+        if(!visible) return;
+
+        project.classList.remove("reveal", "show", "pop");
+        void project.offsetWidth;
+        project.style.setProperty("--d", Math.min(i++, 5) * 60 + "ms");
+
+        if(!reduce) project.classList.add("pop");
       });
     });
   });
@@ -1243,6 +1321,7 @@
   /* ---------- Active navigation + progress ---------- */
 
   const sections = Array.from(document.querySelectorAll("main section[id]"));
+  const nav = document.getElementById("nav");
   const navLinks = document.querySelectorAll(".nav a");
   const bars = document.querySelectorAll(".progress i");
 
@@ -1250,7 +1329,15 @@
     const id = sections[index].id;
 
     navLinks.forEach(function(link){
-      link.classList.toggle("active", link.getAttribute("href") === "#" + id);
+      const on = link.getAttribute("href") === "#" + id;
+      link.classList.toggle("active", on);
+
+      if(on && nav.scrollWidth > nav.clientWidth){
+        nav.scrollTo({
+          left: link.offsetLeft - (nav.clientWidth - link.offsetWidth) / 2,
+          behavior: reduce ? "auto" : "smooth"
+        });
+      }
     });
 
     bars.forEach(function(bar, i){
@@ -1272,10 +1359,48 @@
     });
   }
 
-  /* Bagian terakhir pendek, jadi aktifkan saat halaman mentok di bawah */
-  window.addEventListener("scroll", function(){
-    if(window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4){
+
+  /* ---------- Header: shadow, hide on scroll down (phones), last section ---------- */
+
+  let lastY = window.scrollY;
+  let pinnedUntil = 0;
+  let ticking = false;
+
+  document.querySelectorAll(".nav a,.brand").forEach(function(link){
+    link.addEventListener("click", function(){
+      pinnedUntil = Date.now() + 1500;
+      top.classList.remove("hide");
+    });
+  });
+
+  function onScroll(){
+    ticking = false;
+
+    const y = window.scrollY;
+    const dy = y - lastY;
+
+    top.classList.toggle("scrolled", y > 8);
+
+    if(Math.abs(dy) > 6){
+      lastY = y;
+
+      if(window.innerWidth <= 700 && Date.now() > pinnedUntil){
+        top.classList.toggle("hide", dy > 0 && y > 160);
+      }else{
+        top.classList.remove("hide");
+      }
+    }
+
+    /* The last section is short, so activate it when the page reaches the bottom */
+    if(window.innerHeight + y >= document.documentElement.scrollHeight - 4){
       setActive(sections.length - 1);
+    }
+  }
+
+  window.addEventListener("scroll", function(){
+    if(!ticking){
+      ticking = true;
+      requestAnimationFrame(onScroll);
     }
   },{passive:true});
 
