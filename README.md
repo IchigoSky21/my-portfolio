@@ -55,10 +55,6 @@ The portfolio also lists MindScan (NLP), Pothole Detection (computer vision), an
 my-portfolio/
 ├── index.html        # markup, styles, and scripts in a single file
 ├── og-image.png      # link preview image (1200 × 630)
-├── img/              # screenshots used in this README
-│   ├── preview.png
-│   ├── preview-projects.png
-│   └── preview-mobile.png
 └── README.md
 ```
 
