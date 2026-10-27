@@ -6,6 +6,8 @@
   <meta name="description" content="Portfolio IchigoSky21 — Software Engineering, Web Development, Machine Learning, Computer Vision, and NLP.">
   <title>IchigoSky21 — Portfolio</title>
 
+  <link rel="preload" href="fonts/fredoka.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/figtree.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='3' y='13' width='26' height='16' rx='3' fill='%23d42a47'/%3E%3Crect x='7' y='6' width='7' height='9' rx='2.5' fill='%23d42a47'/%3E%3Crect x='18' y='6' width='7' height='9' rx='2.5' fill='%23d42a47'/%3E%3C/svg%3E">
   <meta name="theme-color" content="#f2f6fc" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0e1424" media="(prefers-color-scheme: dark)">
@@ -25,11 +27,13 @@
   <meta name="twitter:description" content="Portfolio of IchigoSky21 (Emmanuel), a Software Engineering student building web apps and machine learning projects.">
   <meta name="twitter:image" content="https://my-portofolio.hetobias05.workers.dev/og-image.png">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Fredoka:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
   <style>
+    /* Fonts are served from /fonts (no third-party requests). Variable fonts: one file covers every weight. */
+    @font-face{font-family:"Fredoka";font-style:normal;font-weight:300 700;font-display:swap;src:url("fonts/fredoka.woff2") format("woff2")}
+    @font-face{font-family:"Figtree";font-style:normal;font-weight:300 900;font-display:swap;src:url("fonts/figtree.woff2") format("woff2")}
+    @font-face{font-family:"JetBrains Mono";font-style:normal;font-weight:100 800;font-display:swap;src:url("fonts/jetbrains-mono.woff2") format("woff2")}
+
     :root{
       --bg:#f2f6fc;
       --surface:#ffffff;
@@ -40,7 +44,7 @@
       --red:#d42a47;
       --blue:#1f72c4;
       --yellow:#ffc72c;
-      --green:#178a4c;
+      --green:#147a44;
       --on-red:#fff;
       --on-blue:#fff;
       --on-yellow:#1b1500;
@@ -98,12 +102,20 @@
       margin:0;
       color:var(--fg);
       background:var(--bg);
-      background-image:radial-gradient(circle,var(--surface-2) 0 6px,transparent 7px);
-      background-size:34px 34px;
       font-family:var(--body);
       font-size:17px;
       line-height:1.6;
       padding:0 max(18px,env(safe-area-inset-right,0px)) 48px max(18px,env(safe-area-inset-left,0px));
+    }
+
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      z-index:-1;
+      pointer-events:none;
+      background-image:radial-gradient(circle,var(--surface-2) 0 6px,transparent 7px);
+      background-size:34px 34px;
     }
 
     a{color:inherit}
@@ -744,17 +756,16 @@
     .progress i{transition:background-color .35s ease}
     .nav a{transition:color .2s ease,background-color .2s ease}
 
-    @keyframes rise{from{opacity:0;transform:translateY(24px)}}
+    @keyframes rise{from{transform:translateY(28px)}}
     @keyframes pop{from{opacity:0;transform:translateY(12px) scale(.94)}}
     @keyframes snap{
-      0%{opacity:0;transform:translateY(-18px) rotate(-3deg)}
-      60%{opacity:1;transform:translateY(4px) rotate(1deg)}
-      100%{opacity:1;transform:none}
+      0%{transform:translateY(-18px) rotate(-3deg)}
+      60%{transform:translateY(4px) rotate(1deg)}
+      100%{transform:none}
     }
 
-    .js .reveal{opacity:0}
+    .js .reveal:not(.show){transform:translateY(28px)}
     .js .reveal.show{
-      opacity:1;
       animation:rise .7s cubic-bezier(.2,.7,.2,1) var(--d,0s) backwards;
     }
     .project.pop{animation:pop .45s cubic-bezier(.3,1.35,.5,1) var(--d,0s) backwards}
@@ -845,7 +856,7 @@
     <aside class="hero-card">
       <span class="step">1</span>
 
-      <div class="build" aria-label="Illustration of stacked bricks">
+      <div class="build" role="img" aria-label="Illustration of stacked bricks">
         <span class="brick r" style="--n:0"></span>
         <span class="brick y" style="--n:1"></span>
         <span class="brick b" style="--n:2"></span>
@@ -1399,6 +1410,21 @@
   const navLinks = document.querySelectorAll(".nav a");
   const bars = document.querySelectorAll(".progress i");
 
+  let userScrolled = false;
+  let pendingCenter = null;
+
+  function centerNav(){
+    const link = pendingCenter;
+    pendingCenter = null;
+
+    if(!link || nav.scrollWidth <= nav.clientWidth) return;
+
+    nav.scrollTo({
+      left: link.offsetLeft - (nav.clientWidth - link.offsetWidth) / 2,
+      behavior: reduce ? "auto" : "smooth"
+    });
+  }
+
   function setActive(index){
     const id = sections[index].id;
 
@@ -1406,13 +1432,10 @@
       const on = link.getAttribute("href") === "#" + id;
       link.classList.toggle("active", on);
 
-      if(on && nav.scrollWidth > nav.clientWidth){
-        nav.scrollTo({
-          left: link.offsetLeft - (nav.clientWidth - link.offsetWidth) / 2,
-          behavior: reduce ? "auto" : "smooth"
-        });
-      }
+      if(on && userScrolled) pendingCenter = link;
     });
+
+    if(pendingCenter) requestAnimationFrame(centerNav);
 
     bars.forEach(function(bar, i){
       bar.classList.toggle("on", i <= index);
@@ -1436,7 +1459,7 @@
 
   /* ---------- Header: shadow, hide on scroll down (phones), last section ---------- */
 
-  let lastY = window.scrollY;
+  let lastY = -1;
   let pinnedUntil = 0;
   let ticking = false;
 
@@ -1451,7 +1474,13 @@
     ticking = false;
 
     const y = window.scrollY;
+
+    if(lastY < 0) lastY = y;
+
     const dy = y - lastY;
+    const atBottom = window.innerHeight + y >= document.documentElement.scrollHeight - 4;
+
+    userScrolled = true;
 
     top.classList.toggle("scrolled", y > 8);
 
@@ -1466,7 +1495,7 @@
     }
 
     /* The last section is short, so activate it when the page reaches the bottom */
-    if(window.innerHeight + y >= document.documentElement.scrollHeight - 4){
+    if(atBottom){
       setActive(sections.length - 1);
     }
   }
